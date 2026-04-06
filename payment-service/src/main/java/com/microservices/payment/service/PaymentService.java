@@ -18,7 +18,7 @@ public class PaymentService {
     }
 
     public Payment processPayment(PaymentRequest request) {
-
+        System.out.println("👉 Calling Payment Service..."); // 🔥 ADD THIS
         Payment payment = new Payment();
         payment.setOrderId(request.getOrderId());
         payment.setAmount(request.getAmount());

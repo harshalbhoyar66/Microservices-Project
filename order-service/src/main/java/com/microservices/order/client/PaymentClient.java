@@ -9,7 +9,12 @@ import java.util.Map;
 @Component
 public class PaymentClient {
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
+
+    // ✅ Inject RestTemplate (DO NOT create new)
+    public PaymentClient(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public Object processPayment(Long orderId, Double amount) {
 
@@ -18,7 +23,7 @@ public class PaymentClient {
         request.put("amount", amount);
 
         return restTemplate.postForObject(
-                "http://localhost:8083/api/v1/payments",
+                "http://payment-service/api/v1/payments", // 🔥 IMPORTANT CHANGE
                 request,
                 Object.class
         );
